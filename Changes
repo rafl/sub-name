@@ -1,0 +1,5 @@
+$Id: Changes,v 1.1 2004/08/18 17:53:45 xmath Exp $
+
+0.02 -- Wed Aug 18 19:51:36 CEST 2004
+    * Fixed documentation, which erroneously mentioned the existance of
+      two exported functions.

@@ -1,4 +1,4 @@
-$Id: README,v 1.4 2004/08/18 12:03:42 xmath Exp $
+$Id: README,v 1.5 2004/08/18 17:53:45 xmath Exp $
 
 Sub::Name 0.01
 
@@ -23,9 +23,7 @@ SYNOPSIS
         $subref = subname foo => sub { ... };
 
 DESCRIPTION
-    This module has two functions to assign a new name to a sub -- in
-    particular an anonymous sub -- which is displayed in tracebacks and
-    such. Both functions are exported by default.
+    This module has only one function, which is also exported by default:
 
   subname NAME, CODEREF
     Assigns a new name to referenced sub. If package specification is
@@ -36,9 +34,9 @@ DESCRIPTION
     won't be able to actually invoke the sub by the given name. To allow
     that, you need to do glob-assignment yourself.
 
-    Note that for closures (anonymous subs that reference lexicals outside
-    the sub itself) you can name each instance of the closure differently,
-    which can be very useful for debugging.
+    Note that for anonymous closures (subs that reference lexicals declared
+    outside the sub itself) you can name each instance of the closure
+    differently, which can be very useful for debugging.
 
 AUTHOR
     Matthijs van Duin <xmath@cpan.org>
