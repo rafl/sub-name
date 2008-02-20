@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-BEGIN { print "1..3\n"; }
+BEGIN { print "1..5\n"; }
 
 
 use Sub::Name;
@@ -19,6 +19,12 @@ print $x->() eq "Blork:: Bar!" ? "ok 2\n" : "not ok 2\n";
 subname "Foo::Bar::Baz", $x;
 print $x->() eq "Foo::Bar::Baz" ? "ok 3\n" : "not ok 3\n";
 
+subname "subname (dynamic $_)", \&subname  for 1 .. 3;
+
+for (4 .. 5) {
+	subname "Dynamic $_", $x;
+	print $x->() eq "Blork::Dynamic $_" ? "ok $_\n" : "not ok $_\n";
+}
 
 # $Id: smoke.t,v 1.4 2004/08/18 12:03:42 xmath Exp $
 # vim: ft=perl

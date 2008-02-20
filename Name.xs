@@ -8,9 +8,7 @@
 #include "perl.h"
 #include "XSUB.h"
 
-#ifdef USE_5005THREADS
-#error "Not compatible with 5.005 threads"
-#endif
+static MGVTBL subname_vtbl;
 
 MODULE = Sub::Name  PACKAGE = Sub::Name
 
@@ -58,6 +56,24 @@ subname(name, sub)
 	}
 	gv = (GV *) newSV(0);
 	gv_init(gv, stash, name, s - name, TRUE);
-	av_store((AV *) AvARRAY(CvPADLIST(cv))[0], 0, (SV *) gv);
+#ifndef USE_5005THREADS
+	if (CvPADLIST(cv)) {
+		/* cheap way to refcount the gv */
+		av_store((AV *) AvARRAY(CvPADLIST(cv))[0], 0, (SV *) gv);
+	}
+#endif
+	else {
+		/* expensive way to refcount the gv */
+		MAGIC *mg = SvMAGIC(cv);
+		while (mg && mg->mg_virtual != &subname_vtbl)
+			mg = mg->mg_moremagic;
+		if (!mg)
+			mg = sv_magicext((SV *) cv, NULL, PERL_MAGIC_ext,
+					&subname_vtbl, NULL, 0);
+		if (mg->mg_flags & MGf_REFCOUNTED)
+			SvREFCNT_dec(mg->mg_obj);
+		mg->mg_flags |= MGf_REFCOUNTED;
+		mg->mg_obj = (SV *) gv;
+	}
 	CvGV(cv) = gv;
 	PUSHs(sub);
