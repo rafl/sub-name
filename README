@@ -1,6 +1,4 @@
-$Id: README,v 1.5 2004/08/18 17:53:45 xmath Exp $
-
-Sub::Name 0.01
+Sub::Name 0.04
 
 To install this module type the following:
 
@@ -41,6 +39,6 @@ DESCRIPTION
 AUTHOR
     Matthijs van Duin <xmath@cpan.org>
 
-    Copyright (C) 2004 Matthijs van Duin. All rights reserved. This program
-    is free software; you can redistribute it and/or modify it under the
-    same terms as Perl itself.
+    Copyright (C) 2004, 2008 Matthijs van Duin. All rights reserved. This
+    program is free software; you can redistribute it and/or modify it under
+    the same terms as Perl itself.

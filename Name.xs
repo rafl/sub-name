@@ -1,5 +1,4 @@
-/* $Id: Name.xs,v 1.5 2004/08/18 13:21:44 xmath Exp $
- * Copyright (C) 2004  Matthijs van Duin.  All rights reserved.
+/* Copyright (C) 2004, 2008  Matthijs van Duin.  All rights reserved.
  * This program is free software; you can redistribute it and/or modify 
  * it under the same terms as Perl itself.
  */
@@ -9,6 +8,15 @@
 #include "XSUB.h"
 
 static MGVTBL subname_vtbl;
+
+#ifndef PERL_MAGIC_ext
+# define PERL_MAGIC_ext '~'
+#endif
+
+#ifndef SvMAGIC_set
+#define SvMAGIC_set(sv, val) (SvMAGIC(sv) = (val))
+#endif
+
 
 MODULE = Sub::Name  PACKAGE = Sub::Name
 
@@ -60,16 +68,20 @@ subname(name, sub)
 	if (CvPADLIST(cv)) {
 		/* cheap way to refcount the gv */
 		av_store((AV *) AvARRAY(CvPADLIST(cv))[0], 0, (SV *) gv);
-	}
+	} else
 #endif
-	else {
+	{
 		/* expensive way to refcount the gv */
 		MAGIC *mg = SvMAGIC(cv);
 		while (mg && mg->mg_virtual != &subname_vtbl)
 			mg = mg->mg_moremagic;
-		if (!mg)
-			mg = sv_magicext((SV *) cv, NULL, PERL_MAGIC_ext,
-					&subname_vtbl, NULL, 0);
+		if (!mg) {
+			Newz(702, mg, 1, MAGIC);
+			mg->mg_moremagic = SvMAGIC(cv);
+			mg->mg_type = PERL_MAGIC_ext;
+			mg->mg_virtual = &subname_vtbl;
+			SvMAGIC_set(cv, mg);
+		}
 		if (mg->mg_flags & MGf_REFCOUNTED)
 			SvREFCNT_dec(mg->mg_obj);
 		mg->mg_flags |= MGf_REFCOUNTED;

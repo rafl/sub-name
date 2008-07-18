@@ -1,5 +1,3 @@
-# $Id: Makefile.PL,v 1.1 2004/08/17 19:23:24 xmath Exp $
-
 use 5.006;
 use ExtUtils::MakeMaker;
 

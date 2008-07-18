@@ -1,5 +1,3 @@
-# $Id: Name.pm,v 1.5 2004/08/18 17:53:45 xmath Exp $
-
 package Sub::Name;
 
 =head1 NAME
@@ -35,7 +33,7 @@ can be very useful for debugging.
 
 Matthijs van Duin <xmath@cpan.org>
 
-Copyright (C) 2004  Matthijs van Duin.  All rights reserved.
+Copyright (C) 2004, 2008  Matthijs van Duin.  All rights reserved.
 This program is free software; you can redistribute it and/or modify 
 it under the same terms as Perl itself.
 
@@ -46,7 +44,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use base 'Exporter';
 use base 'DynaLoader';

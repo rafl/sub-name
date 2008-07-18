@@ -26,5 +26,4 @@ for (4 .. 5) {
 	print $x->() eq "Blork::Dynamic $_" ? "ok $_\n" : "not ok $_\n";
 }
 
-# $Id: smoke.t,v 1.4 2004/08/18 12:03:42 xmath Exp $
 # vim: ft=perl
