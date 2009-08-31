@@ -31,6 +31,7 @@ subname(name, sub)
 	GV *gv;
 	HV *stash = CopSTASH(PL_curcop);
 	char *s, *end = NULL, saved;
+	MAGIC *mg;
     PPCODE:
 	if (!SvROK(sub) && SvGMAGICAL(sub))
 		mg_get(sub);
@@ -65,29 +66,21 @@ subname(name, sub)
 	}
 	gv = (GV *) newSV(0);
 	gv_init(gv, stash, name, s - name, TRUE);
-#ifndef USE_5005THREADS
-	if (CvPADLIST(cv)) {
-		/* cheap way to refcount the gv */
-		av_store((AV *) AvARRAY(CvPADLIST(cv))[0], 0, (SV *) gv);
-	} else
-#endif
-	{
-		/* expensive way to refcount the gv */
-		MAGIC *mg = SvMAGIC(cv);
-		while (mg && mg->mg_virtual != &subname_vtbl)
-			mg = mg->mg_moremagic;
-		if (!mg) {
-			Newz(702, mg, 1, MAGIC);
-			mg->mg_moremagic = SvMAGIC(cv);
-			mg->mg_type = PERL_MAGIC_ext;
-			mg->mg_virtual = &subname_vtbl;
-			SvMAGIC_set(cv, mg);
-		}
-		if (mg->mg_flags & MGf_REFCOUNTED)
-			SvREFCNT_dec(mg->mg_obj);
-		mg->mg_flags |= MGf_REFCOUNTED;
-		mg->mg_obj = (SV *) gv;
+
+	mg = SvMAGIC(cv);
+	while (mg && mg->mg_virtual != &subname_vtbl)
+		mg = mg->mg_moremagic;
+	if (!mg) {
+		Newz(702, mg, 1, MAGIC);
+		mg->mg_moremagic = SvMAGIC(cv);
+		mg->mg_type = PERL_MAGIC_ext;
+		mg->mg_virtual = &subname_vtbl;
+		SvMAGIC_set(cv, mg);
 	}
+	if (mg->mg_flags & MGf_REFCOUNTED)
+		SvREFCNT_dec(mg->mg_obj);
+	mg->mg_flags |= MGf_REFCOUNTED;
+	mg->mg_obj = (SV *) gv;
 #ifndef CvGV_set
 	CvGV(cv) = gv;
 #else
