@@ -81,6 +81,8 @@ subname(name, sub)
 		SvREFCNT_dec(mg->mg_obj);
 	mg->mg_flags |= MGf_REFCOUNTED;
 	mg->mg_obj = (SV *) gv;
+	SvRMAGICAL_on(cv);
+	CvANON_off(cv);
 #ifndef CvGV_set
 	CvGV(cv) = gv;
 #else
