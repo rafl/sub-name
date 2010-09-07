@@ -1,3 +1,4 @@
+0.05 -- Wed Sep  8 00:51 CEST 2010
     * Stop using the padlist to refcount GVs. Instead use regular magic. This
       allows various modules, including B::Deparse, to safely peek into pads of
       (re)named subs (Closes RT#42725) (Goro Fuji).
