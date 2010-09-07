@@ -1,3 +1,5 @@
+    * Stop using the deprecated PL_no_symref (Closes RT#57843).
+
 0.04 -- Fri Jul 18 15:23 CEST 2008
     * Fixed for perl 5.6 and 5.005 threads (tested)
 

@@ -1,5 +1,5 @@
 /* Copyright (C) 2004, 2008  Matthijs van Duin.  All rights reserved.
- * This program is free software; you can redistribute it and/or modify 
+ * This program is free software; you can redistribute it and/or modify
  * it under the same terms as Perl itself.
  */
 
@@ -41,7 +41,8 @@ subname(name, sub)
 	else if (!SvOK(sub))
 		croak(PL_no_usym, "a subroutine");
 	else if (PL_op->op_private & HINT_STRICT_REFS)
-		croak(PL_no_symref, SvPV_nolen(sub), "a subroutine");
+		croak("Can't use string (\"%.32s\") as %s ref while \"strict refs\" in use",
+		      SvPV_nolen(sub), "a subroutine");
 	else if ((gv = gv_fetchpv(SvPV_nolen(sub), FALSE, SVt_PVCV)))
 		cv = GvCVu(gv);
 	if (!cv)
