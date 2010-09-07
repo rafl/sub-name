@@ -88,5 +88,9 @@ subname(name, sub)
 		mg->mg_flags |= MGf_REFCOUNTED;
 		mg->mg_obj = (SV *) gv;
 	}
+#ifndef CvGV_set
 	CvGV(cv) = gv;
+#else
+	CvGV_set(cv, gv);
+#endif
 	PUSHs(sub);

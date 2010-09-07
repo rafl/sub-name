@@ -1,3 +1,5 @@
+    * Support perl >= 5.13.3 by using the new CvGV_set interface there
+      (Closes RT#59558).
     * Stop using the deprecated PL_no_symref (Closes RT#57843).
 
 0.04 -- Fri Jul 18 15:23 CEST 2008
