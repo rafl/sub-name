@@ -67,6 +67,40 @@ subname(name, sub)
 		Safefree(namepv);
                 name = end;
         }
+
+	/* under debugger, provide information about sub location */
+	if (PL_DBsub && CvGV(cv)) {
+		HV *hv = GvHV(PL_DBsub);
+
+		char* new_pkg = HvNAME(stash);
+
+		char* old_name = GvNAME( CvGV(cv) );
+		char* old_pkg = HvNAME( GvSTASH(CvGV(cv)) );
+
+		int old_len = strlen(old_name) + strlen(old_pkg);
+		int new_len = strlen(name) + strlen(new_pkg);
+
+		char* full_name;
+		Newxz(full_name, (old_len > new_len ? old_len : new_len) + 3, char);
+
+		strcat(full_name, old_pkg);
+		strcat(full_name, "::");
+		strcat(full_name, old_name);
+
+		SV** old_data = hv_fetch(hv, full_name, strlen(full_name), 0);
+
+		if (old_data) {
+			strcpy(full_name, new_pkg);
+			strcat(full_name, "::");
+			strcat(full_name, name);
+
+			SvREFCNT_inc(*old_data);
+			if (!hv_store(hv, full_name, strlen(full_name), *old_data, 0))
+				SvREFCNT_dec(*old_data);
+		}
+		Safefree(full_name);
+	}
+
 	gv = (GV *) newSV(0);
 	gv_init(gv, stash, name, s - name, TRUE);
 
