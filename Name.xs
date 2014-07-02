@@ -1,4 +1,5 @@
 /* Copyright (C) 2004, 2008  Matthijs van Duin.  All rights reserved.
+ * Copyright (C) 2014, cPanel Inc.  All rights reserved.
  * This program is free software; you can redistribute it and/or modify
  * it under the same terms as Perl itself.
  */
