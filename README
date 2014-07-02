@@ -1,15 +1,3 @@
-Sub::Name 0.04
-
-To install this module type the following:
-
-   perl Makefile.PL
-   make
-   make test
-   make install
-
-
-Module documentation:
-
 NAME
     Sub::Name - (re)name a sub
 
