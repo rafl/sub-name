@@ -3,7 +3,7 @@ use warnings;
 
 eval "use B::C;";
 if ($@) {
-  print "1..0 #SKIP B::C required for testing perlcc -O3\n";
+  print "1..0 # SKIP B::C required for testing perlcc -O3\n";
   exit;
 } else {
   print "1..1\n";
