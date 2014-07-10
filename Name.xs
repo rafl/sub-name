@@ -1,4 +1,5 @@
 /* Copyright (C) 2004, 2008  Matthijs van Duin.  All rights reserved.
+ * Copyright (C) 2014, cPanel Inc.  All rights reserved.
  * This program is free software; you can redistribute it and/or modify
  * it under the same terms as Perl itself.
  */
@@ -30,7 +31,7 @@ subname(name, sub)
 	CV *cv = NULL;
 	GV *gv;
 	HV *stash = CopSTASH(PL_curcop);
-	char *s, *end = NULL, saved;
+	char *s, *end = NULL;
 	MAGIC *mg;
     PPCODE:
 	if (!SvROK(sub) && SvGMAGICAL(sub))
@@ -57,13 +58,10 @@ subname(name, sub)
 			end = s;
 	}
 	s--;
-	if (end) {
-		saved = *end;
-		*end = 0;
-		stash = GvHV(gv_fetchpv(name, TRUE, SVt_PVHV));
-		*end = saved;
-		name = end;
-	}
+        if (end) {
+		stash = GvHV(gv_fetchpv(savepvn(name, end - name), TRUE, SVt_PVHV));
+                name = end;
+        }
 	gv = (GV *) newSV(0);
 	gv_init(gv, stash, name, s - name, TRUE);
 
