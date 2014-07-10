@@ -2,6 +2,7 @@
     * Do not change the string arg in XS, use copy instead. Fixes perlcc -O3
       RT#96893 (Reini Urban)
     * add README make target
+    * add more distribution metadata
 
 0.05 -- Wed Sep  8 00:51 CEST 2010
     * Stop using the padlist to refcount GVs. Instead use regular magic. This
