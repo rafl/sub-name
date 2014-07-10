@@ -10,7 +10,7 @@ if ($@) {
 }
 
 my $f = "t/rt96893x.pl";
-open my $fh, ">", $f; END { unlink $f }
+open my $fh, ">", $f; END { unlink $f if $f }
 print $fh 'use Sub::Name; subname("main::bar", sub{42}); print "ok 1\n";';
 close $fh;
 
