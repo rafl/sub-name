@@ -15,6 +15,8 @@ package Sub::Name;
 
 This module has only one function, which is also exported by default:
 
+=for stopwords subname
+
 =head2 subname NAME, CODEREF
 
 Assigns a new name to referenced sub.  If package specification is omitted in
@@ -38,6 +40,8 @@ L<Sub::Identify> - for getting information about subs
 =back
 
 =head1 COPYRIGHT AND LICENSE
+
+=for stopwords cPanel
 
 This software is copyright (c) 2004, 2008 by Matthijs van Duin, all rights reserved;
 copyright (c) 2014 cPanel Inc., all rights reserved.
