@@ -1,8 +1,7 @@
 package Sub::Name;
+# ABSTRACT: (re)name a sub
 
-=head1 NAME
-
-Sub::Name - (re)name a sub
+=pod
 
 =head1 SYNOPSIS
 
@@ -38,12 +37,11 @@ L<Sub::Identify> - for getting information about subs
 
 =back
 
-=head1 AUTHOR
+=head1 COPYRIGHT AND LICENSE
 
-Matthijs van Duin <xmath@cpan.org>
+This software is copyright (c) 2004, 2008 by Matthijs van Duin, all rights reserved;
+copyright (c) 2014 cPanel Inc., all rights reserved.
 
-Copyright (C) 2004, 2008  Matthijs van Duin.  All rights reserved.
-Copyright (C) 2014 cPanel Inc.  All rights reserved.
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
@@ -54,14 +52,17 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.09';
-
 use base 'Exporter';
-use base 'DynaLoader';
 
 our @EXPORT = qw(subname);
 our @EXPORT_OK = @EXPORT;
 
-bootstrap Sub::Name $VERSION;
+use XSLoader;
+XSLoader::load(
+    __PACKAGE__,
+    exists $Sub::Name::{VERSION}
+        ? ${ $Sub::Name::{VERSION} }
+        : (),
+);
 
 1;
