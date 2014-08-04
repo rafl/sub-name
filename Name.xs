@@ -59,7 +59,9 @@ subname(name, sub)
 	}
 	s--;
         if (end) {
-		stash = GvHV(gv_fetchpv(savepvn(name, end - name), TRUE, SVt_PVHV));
+		char *namepv = savepvn(name, end - name);
+		stash = GvHV(gv_fetchpv(namepv, TRUE, SVt_PVHV));
+		Safefree(namepv);
                 name = end;
         }
 	gv = (GV *) newSV(0);
