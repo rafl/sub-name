@@ -7,6 +7,11 @@ WriteMakefile(
     ABSTRACT_FROM   => 'lib/Sub/Name.pm',
     AUTHOR          => 'Matthijs van Duin <xmath@cpan.org>',
 
+    PREREQ_PM       => {
+        'Exporter' => '0',
+        'DynaLoader' => '0',
+    },
+
     MIN_PERL_VERSION => '5.006',
     META_MERGE => {
         'meta-spec' => { version => 2 },
