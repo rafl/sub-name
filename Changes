@@ -1,3 +1,8 @@
+Revision history for Sub-Name
+
+0.08 -- 2014-08-04
+    - Fix leak when setting a fully-qualified name (ilmari, github#1)
+
 0.07 -- 2014-07-11
     - skip optional test if B::C 1.48 is not installed (Reini Urban)
 
