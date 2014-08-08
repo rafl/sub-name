@@ -18,6 +18,9 @@ static MGVTBL subname_vtbl;
 #define SvMAGIC_set(sv, val) (SvMAGIC(sv) = (val))
 #endif
 
+#ifndef Newxz
+#define Newxz(ptr, num, type)	Newz(0, ptr, num, type)
+#endif
 
 MODULE = Sub::Name  PACKAGE = Sub::Name
 
@@ -71,7 +74,7 @@ subname(name, sub)
 	while (mg && mg->mg_virtual != &subname_vtbl)
 		mg = mg->mg_moremagic;
 	if (!mg) {
-		Newz(702, mg, 1, MAGIC);
+		Newxz(mg, 1, MAGIC);
 		mg->mg_moremagic = SvMAGIC(cv);
 		mg->mg_type = PERL_MAGIC_ext;
 		mg->mg_virtual = &subname_vtbl;
