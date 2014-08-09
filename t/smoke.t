@@ -1,7 +1,4 @@
-#!/usr/bin/perl
-
 BEGIN { print "1..10\n"; $^P |= 0x210 }
-
 
 use Sub::Name;
 
