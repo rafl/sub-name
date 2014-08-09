@@ -1,5 +1,8 @@
 Revision history for Sub-Name
 
+    - Copy the contents of the %DB::sub entry if it exists; fixes
+      Devel::NYTProf's anon sub handling (RT#50524, ilmari)
+
 0.08 -- 2014-08-04
     - Fix leak when setting a fully-qualified name (ilmari, github#1)
 
