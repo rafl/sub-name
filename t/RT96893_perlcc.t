@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-eval "use B::C;";
+eval "require B::C;";
 if ($@) {
   print "1..0 # SKIP B::C required for testing perlcc -O3\n";
   exit;
