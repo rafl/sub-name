@@ -6,7 +6,7 @@ use Test::More 0.88;
 plan skip_all => 'B::C required for testing perlcc -O3'
     unless eval "require B::C;";
 
-plan skip_all => "testing too old B-C-$B::C::VERSION"
+plan skip_all => "B::C is too old (require 1.48, have $B::C::VERSION)"
     unless eval { B::C->VERSION('1.48') };
 
 my $f = "t/rt96893x.pl";
