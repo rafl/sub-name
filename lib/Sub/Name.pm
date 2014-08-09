@@ -29,6 +29,15 @@ Note that for anonymous closures (subs that reference lexicals declared outside
 the sub itself) you can name each instance of the closure differently, which
 can be very useful for debugging.
 
+=head1 SEE ALSO
+
+=over 4
+
+=item *
+L<Sub::Identify> - for getting information about subs
+
+=back
+
 =head1 AUTHOR
 
 Matthijs van Duin <xmath@cpan.org>
