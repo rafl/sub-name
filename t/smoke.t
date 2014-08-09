@@ -23,18 +23,18 @@ subname "Foo::Bar::Baz", $x;
 subname "subname (dynamic $_)", \&subname  for 1 .. 3;
 
 for (4 .. 5) {
-	subname "Dynamic $_", $x;
-	::is($x->(), "Blork::Dynamic $_");
+    subname "Dynamic $_", $x;
+    ::is($x->(), "Blork::Dynamic $_");
 }
 
 ::is($DB::sub{"main::foo"}, $anon);
 
 for (4 .. 5) {
-	::is($DB::sub{"Blork::Dynamic $_"}, $anon);
+    ::is($DB::sub{"Blork::Dynamic $_"}, $anon);
 }
 
 for ("Blork:: Bar!", "Foo::Bar::Baz") {
-	::is($DB::sub{$_}, $anon);
+    ::is($DB::sub{$_}, $anon);
 }
 
 ::done_testing;
