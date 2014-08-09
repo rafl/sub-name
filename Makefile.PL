@@ -11,6 +11,10 @@ WriteMakefile(
         'Exporter' => '0',
         'DynaLoader' => '0',
     },
+    BUILD_REQUIRES  => {
+        'Devel::CheckBin' => '0',
+        'Test::More' => '0',
+    },
 
     MIN_PERL_VERSION => '5.006',
     META_MERGE => {
