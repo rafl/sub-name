@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 BEGIN { $^P |= 0x210 }
 
 use Test::More 0.88;
