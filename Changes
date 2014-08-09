@@ -1,5 +1,6 @@
 Revision history for Sub-Name
 
+0.09 -- 2014-08-09
     - Copy the contents of the %DB::sub entry if it exists; fixes
       Devel::NYTProf's anon sub handling (RT#50524, ilmari)
 
