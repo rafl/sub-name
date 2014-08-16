@@ -1,0 +1,95 @@
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+Sub::Name - (re)name a sub
+
+=head1 VERSION
+
+version 0.10
+
+=head1 SYNOPSIS
+
+    use Sub::Name;
+
+    subname $name, $subref;
+
+    $subref = subname foo => sub { ... };
+
+=head1 DESCRIPTION
+
+This module has only one function, which is also exported by default:
+
+=for stopwords subname
+
+=head2 subname NAME, CODEREF
+
+Assigns a new name to referenced sub.  If package specification is omitted in
+the name, then the current package is used.  The return value is the sub.
+
+The name is only used for informative routines (caller, Carp, etc).  You won't
+be able to actually invoke the sub by the given name.  To allow that, you need
+to do glob-assignment yourself.
+
+Note that for anonymous closures (subs that reference lexicals declared outside
+the sub itself) you can name each instance of the closure differently, which
+can be very useful for debugging.
+
+=head1 SEE ALSO
+
+=over 4
+
+=item *
+L<Sub::Identify> - for getting information about subs
+
+=back
+
+=for stopwords cPanel
+
+This software is copyright (c) 2004, 2008 by Matthijs van Duin, all rights reserved;
+copyright (c) 2014 cPanel Inc., all rights reserved.
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+Matthijs van Duin <xmath@cpan.org>
+
+=head1 CONTRIBUTORS
+
+=for stopwords Karen Etheridge Florian Ragwitz Matthijs van Duin Reini Urban Dagfinn Ilmari Mannsåker gfx
+
+=over 4
+
+=item *
+
+Karen Etheridge <ether@cpan.org>
+
+=item *
+
+Florian Ragwitz <rafl@debian.org>
+
+=item *
+
+Matthijs van Duin <xmath-no-spam@nospam.cpan.org>
+
+=item *
+
+Reini Urban <rurban@cpanel.net>
+
+=item *
+
+Dagfinn Ilmari Mannsåker <ilmari@ilmari.org>
+
+=item *
+
+gfx <gfuji@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+=cut
