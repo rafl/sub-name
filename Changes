@@ -1,6 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+    - move variable declaration to fix warning under
+      -Werror=declaration-after-statement, to allow compilation under MSVC
+      (J.R.Mash, github #3)
 
 0.10      2014-08-16 00:46:35Z (TRIAL RELEASE)
     - converted distribution packaging to Dist::Zilla
