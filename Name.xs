@@ -72,7 +72,7 @@ subname(name, sub)
 	if (PL_DBsub && CvGV(cv)) {
 		HV *hv = GvHV(PL_DBsub);
 		SV** old_data;
-		
+
 		char* new_pkg = HvNAME(stash);
 
 		char* old_name = GvNAME( CvGV(cv) );
