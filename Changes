@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.11      2014-08-20 04:44:25Z (TRIAL RELEASE)
     - move variable declaration to fix warning under
       -Werror=declaration-after-statement, to allow compilation under MSVC
       (J.R.Mash, github #3)
