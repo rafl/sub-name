@@ -71,7 +71,8 @@ subname(name, sub)
 	/* under debugger, provide information about sub location */
 	if (PL_DBsub && CvGV(cv)) {
 		HV *hv = GvHV(PL_DBsub);
-
+		SV** old_data;
+		
 		char* new_pkg = HvNAME(stash);
 
 		char* old_name = GvNAME( CvGV(cv) );
@@ -87,7 +88,7 @@ subname(name, sub)
 		strcat(full_name, "::");
 		strcat(full_name, old_name);
 
-		SV** old_data = hv_fetch(hv, full_name, strlen(full_name), 0);
+		old_data = hv_fetch(hv, full_name, strlen(full_name), 0);
 
 		if (old_data) {
 			strcpy(full_name, new_pkg);
