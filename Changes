@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+    - fix licence in LICENSE and pod
 
 0.11      2014-08-20 04:44:25Z (TRIAL RELEASE)
     - move variable declaration to fix warning under
