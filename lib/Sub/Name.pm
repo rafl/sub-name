@@ -32,12 +32,8 @@ can be very useful for debugging.
 
 =head1 SEE ALSO
 
-=over 4
-
-=item *
-L<Sub::Identify> - for getting information about subs
-
-=back
+=for :list
+* L<Sub::Identify> - for getting information about subs
 
 =for stopwords cPanel
 
