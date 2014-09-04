@@ -39,9 +39,9 @@ L<Sub::Identify> - for getting information about subs
 
 =back
 
-=head1 COPYRIGHT AND LICENSE
-
 =for stopwords cPanel
+
+=head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2004, 2008 by Matthijs van Duin, all rights reserved;
 copyright (c) 2014 cPanel Inc., all rights reserved.
