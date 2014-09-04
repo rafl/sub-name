@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.12      2014-09-04 07:28:59Z
     - fix licence in LICENSE and pod
 
 0.11      2014-08-20 04:44:25Z (TRIAL RELEASE)
