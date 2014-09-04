@@ -34,6 +34,7 @@ can be very useful for debugging.
 
 =for :list
 * L<Sub::Identify> - for getting information about subs
+* L<Sub::Util> - set_subname is another implementation of C<subname>
 
 =for stopwords cPanel
 
