@@ -53,6 +53,8 @@ use 5.006;
 use strict;
 use warnings;
 
+our $VERSION = '0.13';
+
 use Exporter 5.57 'import';
 
 our @EXPORT = qw(subname);
@@ -61,9 +63,7 @@ our @EXPORT_OK = @EXPORT;
 use XSLoader;
 XSLoader::load(
     __PACKAGE__,
-    exists $Sub::Name::{VERSION}
-        ? ${ $Sub::Name::{VERSION} }
-        : (),
+    $VERSION,
 );
 
 1;
