@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+    - fix optional test of interaction with B::C that sometimes invalidly
+      failed
 
 0.12      2014-09-04 07:28:59Z
     - fix licence in LICENSE and pod
