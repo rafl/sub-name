@@ -1,4 +1,6 @@
-Revision history for Sub-Name
+Revision history for {{$dist->name}}
+
+{{$NEXT}}
 
 0.13      2015-03-28 06:27:23Z
     - fix optional test of interaction with B::C that sometimes invalidly
