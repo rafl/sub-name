@@ -2,6 +2,12 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.15      2015-03-29
+    - add support for utf8 and binary names (Reini Urban)
+
+0.14      2015-03-29
+    - add tests for utf8 and binary names (Ribasushi + Aristotle Pagaltzis)
+
 0.13      2015-03-28 06:27:23Z
     - fix optional test of interaction with B::C that sometimes invalidly
       failed
