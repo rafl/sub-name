@@ -9,8 +9,10 @@ plan skip_all => 'B::C required for testing perlcc -O3'
 plan skip_all => "B::C is too old (require 1.48, have $B::C::VERSION)"
     unless eval { B::C->VERSION('1.48') };
 
-use Devel::CheckBin;
-plan skip_all => 'perlcc required' unless can_run('perlcc');
+plan skip_all => 'Devel::CheckBin required for looking for a perlcc executable'
+    unless eval 'require Devel::CheckBin';
+
+plan skip_all => 'perlcc required' unless Devel::CheckBin::can_run('perlcc');
 
 plan tests => 1;
 
