@@ -11,31 +11,12 @@
 #define NEED_newSVpvn_flags
 #define NEED_sv_2pv_flags
 #include "ppport.h"
+/* Not in ppport yet: */
+#ifndef HvNAMEUTF8
+#  define HvNAMEUTF8(hv)		0
+#endif
 
 static MGVTBL subname_vtbl;
-
-#ifndef PERL_MAGIC_ext
-# define PERL_MAGIC_ext '~'
-#endif
-#ifndef SvMAGIC_set
-#define SvMAGIC_set(sv, val) (SvMAGIC(sv) = (val))
-#endif
-#ifndef Newxz
-#define Newxz(ptr, num, type)	Newz(0, ptr, num, type)
-#endif
-#ifndef gv_fetchpvn
-#define gv_fetchpvn(s, len, add, type) gv_fetchpv(s, add, type)
-#define HvNAMELEN(hv)		strlen(HvNAME(hv))
-#define HvNAMEUTF8(hv)		0
-#else
-#ifndef HvNAMELEN
-#define HvNAMELEN(hv)		((SvOOK(hv) && HvAUX(hv)->xhv_name_u.xhvnameu_name && HvNAME_HEK_NN(hv)) \
-				 ? HEK_LEN(HvNAME_HEK_NN(hv)) : 0)
-#define HvNAMEUTF8(hv) \
-	((SvOOK(hv) && HvAUX(hv)->xhv_name_u.xhvnameu_name && HvNAME_HEK_NN(hv)) \
-				 ? HEK_UTF8(HvNAME_HEK_NN(hv)) : 0)
-#endif
-#endif
 
 MODULE = Sub::Name  PACKAGE = Sub::Name
 
@@ -62,13 +43,12 @@ subname(name, sub)
 	else if (!SvOK(sub))
 		croak(PL_no_usym, "a subroutine");
 	else if (PL_op->op_private & HINT_STRICT_REFS)
-                /* TODO: utf8 and binary name */
-		croak("Can't use string (\"%.32s\") as %s ref while \"strict refs\" in use",
+		croak("Can't use string (\"%.256s\") as %s ref while \"strict refs\" in use",
 		      SvPV_nolen(sub), "a subroutine");
-	else if ((gv = gv_fetchpvn(SvPV_nolen(sub), SvCUR(sub), FALSE, SVt_PVCV)))
+	else if ((gv = gv_fetchpvn_flags(SvPV_nolen(sub), SvCUR(sub), FALSE, SVt_PVCV)))
 		cv = GvCVu(gv);
-	if (!cv) /* TODO: utf8 and binary name */
-		croak("Undefined subroutine %s", SvPV_nolen(sub));
+	if (!cv)
+		croak("Undefined subroutine %.256s", SvPV_nolen(sub));
 	if (SvTYPE(cv) != SVt_PVCV && SvTYPE(cv) != SVt_PVFM)
 		croak("Not a subroutine reference");
         last = s = SvPVX(name);
@@ -84,7 +64,7 @@ subname(name, sub)
 	}
         if (end) {
                 len = s - end;
-		stash = GvHV(gv_fetchpvn(SvPVX(name), end - SvPVX(name), TRUE, SVt_PVHV));
+		stash = GvHV(gv_fetchpvn_flags(SvPVX(name), end - SvPVX(name), TRUE, SVt_PVHV));
                 s = end;
         } else {
         	len = s - SvPVX(name);
@@ -96,7 +76,7 @@ subname(name, sub)
 		HV *hv = GvHV(PL_DBsub);
                 GV *oldgv = CvGV(cv);
                 HV *oldpkg = GvSTASH(oldgv);
-                SV *full_name = newSVpvn_flags(HvNAME(oldpkg), HvNAMELEN(oldpkg),
+                SV *full_name = newSVpvn_flags(HvNAME(oldpkg), HvNAMELEN_get(oldpkg),
                                                HvNAMEUTF8(oldpkg));
 		SV** old_data;
 
@@ -106,7 +86,7 @@ subname(name, sub)
 		old_data = hv_fetch(hv, SvPVX(full_name), SvCUR(full_name), 0);
 
 		if (old_data) {
-                        full_name = newSVpvn_flags(HvNAME(stash), HvNAMELEN(stash),
+                        full_name = newSVpvn_flags(HvNAME(stash), HvNAMELEN_get(stash),
                                                    HvNAMEUTF8(stash));
                         sv_catpvs(full_name, "::");
                         sv_catpvn(full_name, s, len);
@@ -119,7 +99,17 @@ subname(name, sub)
 	}
 
 	gv = (GV *) newSV(0);
+#if PERL_VERSION >= 16
+        gv_init_pvn(gv, stash, s, len, SvUTF8(name));
+#else
         gv_init(gv, stash, s, len, GV_ADD);
+#if PERL_VERSION >= 10
+        if (SvUTF8(name)) {
+            HEK *namehek = GvNAME_HEK(gv);
+            HEK_LEN(namehek) = -HEK_LEN(namehek);
+        }
+#endif
+#endif
 
 	mg = SvMAGIC(cv);
 	while (mg && mg->mg_virtual != &subname_vtbl)
