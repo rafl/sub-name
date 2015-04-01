@@ -24,9 +24,9 @@ sub caller3_ok {
     # this is apparently how things worked before 5.16
     utf8::encode($expected) if $] < 5.016 and $ord > 255;
 
-    my $stash_name = join '::', map { $_->STASH->NAME, $_->NAME } svref_2object($cref)->GV;
+    my $fullname   = svref_2object($cref)->GV->STASH->NAME . "::" . svref_2object($cref)->GV->NAME;
 
-    is $stash_name, $expected, "stash name for $type is correct $for_what";
+    is $fullname, $expected, "stash name for $type is correct $for_what";
     is $cref->(), $expected, "caller() in $type returns correct name $for_what";
 }
 
@@ -58,7 +58,10 @@ for my $ord (@test_ordinals) {
     my $sub;
     my $pkg       = sprintf 'test::SOME_%c_STASH', $ord;
     my $subname   = sprintf 'SOME_%c_NAME', $ord;
-    my $full_name = join '::', $pkg, $subname;
+    my $full_name = $pkg . '::' . $subname;
+    if ($ord == 0x27 and $] < 5.014) {
+        $full_name = "test::SOME_::_STASH::SOME_::_NAME";
+    }
 
     $sub = subname $full_name => sub { (caller(0))[3] };
     caller3_ok $sub, $full_name, $ord, 'renamed closure';
