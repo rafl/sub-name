@@ -2,9 +2,6 @@ use strict;
 use warnings;
 use Test::More 0.88;
 
-plan skip_all => '5.16 required for binary names'
-  if $] < 5.015006;
-
 my @NAMES = ("тест", "bar\000more",
              "тест::plain", "bar\000more::plain",
              "main::тест", "main::bar\000more");
