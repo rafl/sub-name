@@ -63,8 +63,12 @@ subname(name, sub)
 #endif
 	}
         if (end) {
+                int flags = GV_ADD;
+#if PERL_VERSION > 14
+                flags |= SvUTF8(name);
+#endif
                 len = s - end;
-		stash = GvHV(gv_fetchpvn_flags(SvPVX(name), end - SvPVX(name), TRUE, SVt_PVHV));
+		stash = GvHV(gv_fetchpvn_flags(SvPVX(name), end - SvPVX(name), flags, SVt_PVHV));
                 s = end;
         } else {
         	len = s - SvPVX(name);
