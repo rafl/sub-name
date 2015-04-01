@@ -64,7 +64,7 @@ subname(name, sub)
 	}
         if (end) {
                 int flags = GV_ADD;
-#if PERL_VERSION > 14
+#if PERL_VERSION >= 10
                 flags |= SvUTF8(name);
 #endif
                 len = s - end;
