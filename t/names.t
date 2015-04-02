@@ -59,7 +59,7 @@ for my $ord (@test_ordinals) {
     my $pkg       = sprintf 'test::SOME_%c_STASH', $ord;
     my $subname   = sprintf 'SOME_%c_NAME', $ord;
     my $full_name = $pkg . '::' . $subname;
-    if ($ord == 0x27 and $] < 5.014) {
+    if ($ord == 0x27) {
         $full_name = "test::SOME_::_STASH::SOME_::_NAME";
     }
 
@@ -70,8 +70,8 @@ for my $ord (@test_ordinals) {
     my $expected;
     if ( chr($ord) =~ /^[A-Z_a-z0-9']$/ ) { # legal identifier char, compile directly
         $expected = $full_name;
-        if ( chr($ord) eq "'" ) { # special-case ' == ::
-            $expected =~ s/'/::/g;
+        if ( chr($ord) eq "'" ) {  # special-case ' == ::
+            $expected =~ s/'/::/g; # gv.c:S_parse_gv_stash_name
             $pkg     .=  "::SOME_";
         }
         $sub = eval( "

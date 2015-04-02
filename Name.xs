@@ -53,11 +53,13 @@ subname(name, sub)
 		croak("Not a subroutine reference");
         last = s = SvPVX(name);
         last += SvCUR(name);
-        /* TODO: If there exists a UTF8 codepoint with ending ':' we are screwed */
+        /* TODO: If there exists a UTF8 codepoint with ending ':' we are screwed. But perl5 does not care neither. */
         for (; s < last; s++) {
 		if (*s == ':' && s[-1] == ':')
 			end = ++s;
-#if PERL_VERSION < 14
+                /* "In the year 2525, if man is still alive
+                   If 4 is finally gone" - gv.c:S_parse_gv_stash_name */
+#if PERL_VERSION < 25
 		else if (*s && s[-1] == '\'')
 			end = s;
 #endif
@@ -74,6 +76,7 @@ subname(name, sub)
         	len = s - SvPVX(name);
                 s = SvPVX(name);
         }
+        assert(len >= 0);
 
 	/* under debugger, provide information about sub location */
 	if (PL_DBsub && CvGV(cv)) {
@@ -107,10 +110,12 @@ subname(name, sub)
         gv_init_pvn(gv, stash, s, len, SvUTF8(name));
 #else
         gv_init(gv, stash, s, len, GV_ADD);
-#if PERL_VERSION >= 10
+/* Nope. This old B can not handle this negative HEK_LEN, leaves it negative. */
+#if 0 && PERL_VERSION >= 10
         if (SvUTF8(name)) {
             HEK *namehek = GvNAME_HEK(gv);
-            HEK_LEN(namehek) = -HEK_LEN(namehek);
+            HEK_LEN(namehek) = -abs(HEK_LEN(namehek));
+            SvUTF8_on(gv);
         }
 #endif
 #endif
