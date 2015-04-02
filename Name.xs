@@ -66,17 +66,29 @@ subname(name, sub)
 	}
         if (end) {
                 int flags = GV_ADD;
+                const int stash_len = end - SvPVX(name);
+#if PERL_VERSION <= 8
+                /* <= 5.8.8 needs a copy */
+                SV *tmpbuf = newSVpvn(SvPVX(name), stash_len);
+#endif
 #if PERL_VERSION >= 10
                 flags |= SvUTF8(name);
 #endif
                 len = s - end;
-		stash = GvHV(gv_fetchpvn_flags(SvPVX(name), end - SvPVX(name), flags, SVt_PVHV));
+#if PERL_VERSION <= 8
+		stash = GvHV(gv_fetchpv(SvPVX(tmpbuf), flags, SVt_PVHV));
+                SvREFCNT_dec(tmpbuf);
+#else
+		stash = GvHV(gv_fetchpvn_flags(SvPVX(name), stash_len, flags, SVt_PVHV));
+#endif
                 s = end;
         } else {
         	len = s - SvPVX(name);
                 s = SvPVX(name);
         }
+#if defined(DEBUGGING) && defined(I_ASSERT)
         assert(len >= 0);
+#endif
 
 	/* under debugger, provide information about sub location */
 	if (PL_DBsub && CvGV(cv)) {
