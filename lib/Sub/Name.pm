@@ -53,7 +53,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 
 use Exporter 5.57 'import';
 
