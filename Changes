@@ -2,6 +2,8 @@ Revision history for Sub-Name
 
 {{$NEXT}}
     - remove mandatory dependencies for optional test
+    - mark the test with B::C as TODO, as it seems to fail frequently and
+      should not block normal installations
 
 0.13      2015-03-28 06:27:23Z
     - fix optional test of interaction with B::C that sometimes invalidly

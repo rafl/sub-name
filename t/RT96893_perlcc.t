@@ -18,10 +18,13 @@ plan tests => 1;
 
 my $f = "t/rt96893x.pl";
 open my $fh, ">", $f; END { unlink $f if $f }
-print $fh 'use Sub::Name; subname("main::bar", sub{42}); print "ok 1\n";';
+print $fh 'use Sub::Name; subname("main::bar", sub{42}); print "# successfully ran subname() with perlcc\n";';
 close $fh;
 
 system($^X, qw(-Mblib -S perlcc -O3 -UCarp -UConfig -r), $f);
+
+local $TODO = 'experimental, for informational purposes only';
+is($? >> 8, 0, 'executable completed successfully');
 
 unlink "t/rt96893x", "t/rt96893x.exe";
 # vim: ft=perl
