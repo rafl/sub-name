@@ -1,6 +1,6 @@
 Revision history for Sub-Name
 
-{{$NEXT}}
+0.14      2015-04-24 03:26:54Z
     - remove mandatory dependencies for optional test
     - mark the test with B::C as TODO, as it seems to fail frequently and
       should not block normal installations
