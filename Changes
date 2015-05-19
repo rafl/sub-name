@@ -1,6 +1,7 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - fix uninitialized warning in test on perls < 5.8.6 (RT#104510)
 
 0.14      2015-04-24 03:26:54Z
     - remove mandatory dependencies for optional test
