@@ -2,6 +2,8 @@ Revision history for Sub-Name
 
 {{$NEXT}}
     - fix uninitialized warning in test on perls < 5.8.6 (RT#104510)
+    - repository moved to the github p5sagit organization (the primary is on
+      shadowcat, mirrored to github)
 
 0.14      2015-04-24 03:26:54Z
     - remove mandatory dependencies for optional test
