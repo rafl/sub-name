@@ -11,6 +11,9 @@ follow any of the steps in this document to submit a patch or bug report;
 these are just recommendations, intended to help you (and help us help you
 faster).
 
+This distribution has a TODO file in the repository; you may want to check
+there to see if your issue or patch idea is mentioned.
+
 The distribution is managed with Dist::Zilla (https://metacpan.org/release/Dist-Zilla).
 However, you can still compile and test the code with a small Makefile.PL
 specifically for use in the repository.  You can do:
@@ -27,7 +30,7 @@ or
 
 You may need to satisfy some dependencies.  The easiest way to satisfy
 dependencies is to install the last release -- this is available at
-https://metacpan.org/release/Sub-Name.
+https://metacpan.org/release/Sub-Name
 
 If you use cpanminus, you can do it without downloading the tarball first:
 
@@ -73,7 +76,7 @@ Once installed, here are some dzil commands you might try:
 You can learn more about Dist::Zilla at http://dzil.org/.
 
 The code for this distribution is hosted at GitHub. The repository is:
-https://github.com/karenetheridge/Sub-Name
+https://github.com/p5sagit/Sub-Name
 You can submit code changes by forking the repository, pushing your code
 changes to your clone, and then submitting a pull request. Detailed
 instructions for doing that is available here:
@@ -83,8 +86,10 @@ https://help.github.com/articles/creating-a-pull-request
 If you have found a bug, but do not have an accompanying patch to fix it, you
 can submit an issue report here:
 https://rt.cpan.org/Public/Dist/Display.html?Name=Sub-Name
-or via bug-Sub-Name@rt.cpan.org.
-This is a good place to send your questions about the usage of this distribution.
+or via email: bug-Sub-Name@rt.cpan.org
+
+There is also an irc channel available for users of this distribution, at
+irc://irc.perl.org/#toolchain
 
 If you send me a patch or pull request, your name and email address will be
 included in the documentation as a contributor (using the attribution on the
@@ -93,5 +98,5 @@ wish to be listed under a different name or address, you should submit a pull
 request to the .mailmap file to contain the correct mapping.
 
 
-This file was generated via Dist::Zilla::Plugin::GenerateFile::ShareDir 0.005 from a
-template file originating in Dist-Zilla-PluginBundle-Author-ETHER-0.092.
+This file was generated via Dist::Zilla::Plugin::GenerateFile::FromShareDir 0.009 from a
+template file originating in Dist-Zilla-PluginBundle-Author-ETHER-0.112.
