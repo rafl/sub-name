@@ -1,9 +1,10 @@
-use 5.006;
-use ExtUtils::MakeMaker;
-
+use strict;
+use warnings;
+use lib 'inc';
+use ExtUtils::MakeMaker::Dist::Zilla::Develop;
 WriteMakefile(
-	NAME		=> 'Sub::Name',
-	VERSION_FROM	=> 'lib/Sub/Name.pm',
-	ABSTRACT_FROM	=> 'lib/Sub/Name.pm',
-	AUTHOR		=> 'Matthijs van Duin <xmath@cpan.org>'
+    NAME => 'Sub::Name',
+    VERSION_FROM => 'lib/Sub/Name.pm',
+    INSTALLMAN1DIR => 'none',
+    INSTALLMAN3DIR => 'none',
 );
