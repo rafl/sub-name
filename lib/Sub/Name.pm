@@ -1,5 +1,5 @@
 package Sub::Name;
-# ABSTRACT: (re)name a sub
+# ABSTRACT: (Re)name a sub
 
 =pod
 
