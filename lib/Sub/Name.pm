@@ -1,5 +1,6 @@
 package Sub::Name;
 # ABSTRACT: (Re)name a sub
+# KEYWORDS: subroutine function utility name rename symbol
 
 =pod
 
