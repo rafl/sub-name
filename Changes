@@ -1,6 +1,8 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - support binary and unicode symbol names (Leon Timmermans, Aristotle
+      Pagaltzis, Peter Rabbitson, Reini Urban, PR#8)
 
 0.15      2016-03-15 22:17:38Z
     - fix uninitialized warning in test on perls < 5.8.6 (RT#104510)
