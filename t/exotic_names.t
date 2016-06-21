@@ -9,9 +9,9 @@ use B 'svref_2object';
 # and remains unclear past 5.16 with evalbytes and feature unicode_eval
 # In any case - Sub::Name needs to *somehow* work with this, so we will do
 # a heuristic with ambiguous eval and looking for octets in the stash
-use if $] >= 5.016, feature => 'unicode_eval';
+use if "$]" >= 5.016, feature => 'unicode_eval';
 
-if ($] >= 5.008) {
+if ("$]" >= 5.008) {
 	my $builder = Test::More->builder;
 	binmode $builder->output,         ":encoding(utf8)";
 	binmode $builder->failure_output, ":encoding(utf8)";
@@ -47,7 +47,7 @@ sub caller3_ok {
     $expected =~ s/'/::/g;
 
     # this is apparently how things worked before 5.16
-    utf8::encode($expected) if $] < 5.016 and $ord > 255;
+    utf8::encode($expected) if "$]" < 5.016 and $ord > 255;
 
     my $stash_name = join '::', map { $_->STASH->NAME, $_->NAME } svref_2object($sub)->GV;
 
@@ -63,7 +63,7 @@ my @ordinal = ( 1 .. 255 );
 
 # 5.14 is the first perl to start properly handling \0 in identifiers
 unshift @ordinal, 0
-    unless $] < 5.014;
+    unless "$]" < 5.014;
 
 # Unicode in 5.6 is not sane (crashes etc)
 push @ordinal,
@@ -71,13 +71,13 @@ push @ordinal,
     0x498,    # CYRILLIC CAPITAL LETTER ZE WITH DESCENDER
     0x2122,   # TRADE MARK SIGN
     0x1f4a9,  # PILE OF POO
-    unless $] < 5.008;
+    unless "$]" < 5.008;
 
 plan tests => @ordinal * 2 * 2;
 
 my $legal_ident_char = "A-Z_a-z0-9'";
 $legal_ident_char .= join '', map chr, 0x100, 0x498
-    unless $] < 5.008;
+    unless "$]" < 5.008;
 
 for my $ord (@ordinal) {
     my $sub;
