@@ -1,6 +1,7 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - no changes since 0.17
 
 0.17      2016-06-27 22:45:27Z (TRIAL RELEASE)
     - fixed parsing error where the name contains a single colon but the last
