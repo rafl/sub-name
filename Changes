@@ -1,5 +1,7 @@
 Revision history for Sub-Name
 
+{{$NEXT}}
+
 0.19      2016-08-18 18:52:33Z
     - fix checking of SvUTF8 flag
 
