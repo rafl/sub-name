@@ -1,6 +1,6 @@
 Revision history for Sub-Name
 
-{{$NEXT}}
+0.19      2016-08-18 18:52:33Z
     - fix checking of SvUTF8 flag
 
 0.18      2016-08-16 01:07:54Z
