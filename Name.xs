@@ -63,13 +63,13 @@ subname(name, sub)
 		croak("Not a subroutine reference");
 
 	for (s = nameptr; s <= nameptr + namelen; s++) {
-		if (*s == ':' && s[-1] == ':') {
+		if (s > nameptr && *s == ':' && s[-1] == ':') {
 			end = s - 1;
 			begin = ++s;
 			if (seen_quote)
 				need_subst++;
 		}
-		else if (*s && s[-1] == '\'') {
+		else if (s > nameptr && *s != '\0' && s[-1] == '\'') {
 			end = s - 1;
 			begin = s;
 			if (seen_quote++)
