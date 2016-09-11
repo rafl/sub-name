@@ -1,6 +1,9 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - fix occasional segmentation fault on OpenBSD when malloc randomization
+      causes nameptr to be at the beginning of the page (RT#117072, Alexander
+      Bluhm)
 
 0.19      2016-08-18 18:52:33Z
     - fix checking of SvUTF8 flag
