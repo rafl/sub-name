@@ -1,6 +1,6 @@
 Revision history for Sub-Name
 
-{{$NEXT}}
+0.20      2016-09-11 00:33:10Z (TRIAL RELEASE)
     - fix occasional segmentation fault on OpenBSD when malloc randomization
       causes nameptr to be at the beginning of the page (RT#117072, Alexander
       Bluhm)
