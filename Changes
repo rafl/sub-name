@@ -1,6 +1,7 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - no change since 0.20
 
 0.20      2016-09-11 00:33:10Z (TRIAL RELEASE)
     - fix occasional segmentation fault on OpenBSD when malloc randomization
