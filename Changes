@@ -1,6 +1,9 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - %DB::sub is now populated correctly for sub names with wide characters
+      or nulls. (PR#9: Graham Knop, Leon Timmermans, Reini Urban)
+    - better perl 5.6 compatibility by lowering prereqs of core modules
 
 0.21      2016-10-02 05:00:12Z
     - no change since 0.20
