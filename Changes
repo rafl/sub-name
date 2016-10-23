@@ -1,6 +1,8 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - test for renaming lexical subs, which should work on perl 5.22+. (PR#10,
+      Graham Knop)
 
 0.22      2016-10-17 01:41:42Z (TRIAL RELEASE)
     - %DB::sub is now populated correctly for sub names with wide characters
