@@ -72,7 +72,8 @@ subname(name, sub)
 	STRLEN namelen;
 	const char* nameptr = SvPV(name, namelen);
 	int utf8flag = SvUTF8(name);
-	int seen_quote = 0, need_subst = 0;
+	int quotes_seen = 0;
+	bool need_subst = FALSE;
     PPCODE:
 	if (!SvROK(sub) && SvGMAGICAL(sub))
 		mg_get(sub);
@@ -96,21 +97,21 @@ subname(name, sub)
 		if (s > nameptr && *s == ':' && s[-1] == ':') {
 			end = s - 1;
 			begin = ++s;
-			if (seen_quote)
-				need_subst++;
+			if (quotes_seen)
+				need_subst = TRUE;
 		}
 		else if (s > nameptr && *s != '\0' && s[-1] == '\'') {
 			end = s - 1;
 			begin = s;
-			if (seen_quote++)
-				need_subst++;
+			if (quotes_seen++)
+				need_subst = TRUE;
 		}
 	}
 	s--;
 	if (end) {
 		SV* tmp;
 		if (need_subst) {
-			STRLEN length = end - nameptr + seen_quote - (*end == '\'' ? 1 : 0);
+			STRLEN length = end - nameptr + quotes_seen - (*end == '\'' ? 1 : 0);
 			char* left;
 			int i, j;
 			tmp = newSV(length);
