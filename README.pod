@@ -8,7 +8,7 @@ Sub::Name - (Re)name a sub
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 SYNOPSIS
 
@@ -67,7 +67,7 @@ Matthijs van Duin <xmath@cpan.org>
 
 =head1 CONTRIBUTORS
 
-=for stopwords Karen Etheridge Leon Timmermans Graham Knop Reini Urban Florian Ragwitz Matthijs van Duin Dagfinn Ilmari Mannsåker gfx Aristotle Pagaltzis J.R. Mash Alexander Bluhm
+=for stopwords Karen Etheridge Graham Knop Leon Timmermans Reini Urban Florian Ragwitz Matthijs van Duin Dagfinn Ilmari Mannsåker gfx Aristotle Pagaltzis J.R. Mash Alexander Bluhm
 
 =over 4
 
@@ -77,11 +77,11 @@ Karen Etheridge <ether@cpan.org>
 
 =item *
 
-Leon Timmermans <fawaka@gmail.com>
+Graham Knop <haarg@haarg.org>
 
 =item *
 
-Graham Knop <haarg@haarg.org>
+Leon Timmermans <fawaka@gmail.com>
 
 =item *
 
