@@ -11,6 +11,7 @@
 #define NEED_newSVpvn_flags
 #define NEED_gv_fetchpvn_flags
 #define NEED_sv_catpvn_flags
+#define NEED_croak_xs_usage
 #include "ppport.h"
 
 static MGVTBL subname_vtbl;
