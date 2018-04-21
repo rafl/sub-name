@@ -1,6 +1,8 @@
 Revision history for Sub-Name
 
 {{$NEXT}}
+    - fix "Undefined symbol "DPPP_my_croak_xs_usage"" error on some perls
+      (RT#125158)
 
 0.24      2018-04-21 08:15:30Z (TRIAL RELEASE)
     - small internal changes to bring implementation in line with changes to
