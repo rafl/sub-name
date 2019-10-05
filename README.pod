@@ -8,7 +8,7 @@ Sub::Name - (Re)name a sub
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 
@@ -85,7 +85,7 @@ Leon Timmermans <fawaka@gmail.com>
 
 =item *
 
-Reini Urban <rurban@cpanel.net>
+Reini Urban <rurban@cpan.org>
 
 =item *
 
