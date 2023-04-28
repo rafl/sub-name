@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 2;
+use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 use Sub::Name;
 use B::Deparse;
 
